@@ -5,6 +5,7 @@
 snap install docker
 
 #mkdir -p /home/"your-git-code-directory-here"
+
 cd /home/git-repositories/ #"your-git-code-directory-here"
 
 #clone [https://github.com/blynkkk/blynk-library](https://github.com/blynkkk/blynk-library)
