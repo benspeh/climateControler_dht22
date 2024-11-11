@@ -15,7 +15,7 @@ sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.co
 
 cd WiringPi
 
-udo docker run --rm -v "$PWD":/workspace -w /workspace ubuntu bash -c "apt update && apt install -y build-essential && ./build"
+sudo docker run --rm -v "$PWD":/workspace -w /workspace ubuntu bash -c "apt update && apt install -y build-essential && ./build"
 
 #### clone [https://github.com/blynkkk/blynk-library](https://github.com/blynkkk/blynk-library)
 sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.com/blynkkk/blynk-library.git
