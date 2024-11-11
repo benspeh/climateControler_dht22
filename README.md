@@ -13,3 +13,5 @@ cd /home/git-repositories/ #"your-git-code-directory-here"
 #### clone [https://github.com/blynkkk/blynk-library](https://github.com/blynkkk/blynk-library)
 sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.com/blynkkk/blynk-library.git
 
+#### build on raspberry
+Follow instructions on https://github.com/blynkkk/blynk-library/tree/master/linux#readme
