@@ -10,6 +10,14 @@ snap install docker
 #### change dir 
 cd /home/git-repositories/ #"your-git-code-directory-here"
 
+#### install WiringPi
+sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.com/WiringPi/WiringPi.git
+cd WiringPi
+
+sudo docker run --rm -v "$PWD":/workspace -w /workspace ubuntu bash -c "apt update && apt install -y build-essential && make"
+
+./build
+
 #### clone [https://github.com/blynkkk/blynk-library](https://github.com/blynkkk/blynk-library)
 sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.com/blynkkk/blynk-library.git
 
