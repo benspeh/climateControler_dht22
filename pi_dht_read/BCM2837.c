@@ -29,7 +29,7 @@
 
 #include "bcm2708.h"
 
-// EDITED TO BCM2837 adress
+// EDITED TO BCM2837 adresse
 #define BASE 0x3F000000
 #define GPIO_BASE (BASE + 0x200000)
 #define GPIO_LENGTH 4096
