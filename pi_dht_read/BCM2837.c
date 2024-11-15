@@ -29,10 +29,11 @@
 
 #include "bcm2708.h"
 
-#define BASE 0x20000000
+// EDITED TO BCM2837 adress
+#define BASE 0x3F000000
 #define GPIO_BASE (BASE + 0x200000)
 #define GPIO_LENGTH 4096
-#define BCM2708_ST_BASE 0x20003000 /* BCM 2708 System Timer */
+#define BCM2708_ST_BASE (BASE + 0x3000) /* BCM BCM2837 System Timer */
 
 volatile uint32_t* pi_mmio_gpio = NULL;
 volatile uint32_t *pi_mmio_timer = NULL;
