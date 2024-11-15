@@ -3,9 +3,10 @@
 
 ### Install blynk-library and dh22 lib
 #### install docker
-snap install docker
+    snap install docker
+    
 #### create dir
-#mkdir -p /home/"your-git-code-directory-here"
+    #mkdir -p /home/"your-git-code-directory-here"
 
 #### change dir 
     cd /home/git-repositories/ #"your-git-code-directory-here"
