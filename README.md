@@ -1,7 +1,7 @@
-# climate_controle_d22
+# climateControler_dht22
 ## d22 on blynk cloud ubuntu core 24 raspberry pi model 3B+ 
 
-### Install blynk-library and dh22 lib
+### Install blynk-library and dht22 lib
 #### install docker
     snap install docker
     
