@@ -3,12 +3,16 @@ Description=Your DHT Read Program
 After=network.target
 
 [Service]
-ExecStart=/home/git-repositories/climateControler_dht22/pi_dht_read"
-User=benspeh357
-Group=benspeh357
+ExecStart=/home/git-repositories/climateControler_dht22/pi_dht_read/test_dht_read 1000000
+WorkingDirectory=/home/git-repositories/climateControler_dht22/pi_dht_read
+User=root
 Restart=always
 # Add necessary capabilities
-CapabilityBoundingSet=CAP_SYS_RAWIO
+#CapabilityBoundingSet=CAP_SYS_RAWIO
+AmbientCapabilities=CAP_SYS_RAWIO
+DeviceAllow=/dev/i2c-1 rw
 
 [Install]
 WantedBy=multi-user.target
+
+
