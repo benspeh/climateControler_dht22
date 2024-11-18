@@ -35,14 +35,14 @@ std::string getLogHeader() {
 // Return time in microseconds when the pin input signal is changed to the desired state.
 static uint32_t getTransitionMicros(int pin, bool transitionHigh) {
     uint32_t expectedValue = transitionHigh ? (1 << pin) : 0;
-    uint32_t startedMicros = pi_timer_micros();
-    while (pi_mmio_input(pin) != expectedValue) {
-        uint32_t elapsedMicros = pi_timer_micros() - startedMicros;
+    uint32_t startedMicros = RaspberryPi::pi_timer_micros();
+    while (RaspberryPi::pi_mmio_input(pin) != expectedValue) {
+        uint32_t elapsedMicros = RaspberryPi::pi_timer_micros() - startedMicros;
         if (elapsedMicros >= MAX_WAIT_US) {
             return 0; // Timeout
         }
     }
-    uint32_t nowMicros = pi_timer_micros();
+    uint32_t nowMicros = RaspberryPi::pi_timer_micros();
     return (nowMicros == 0) ? UINT32_MAX : nowMicros;
 }
 
@@ -53,19 +53,19 @@ static int pi_dht_read(int type, int pin, float* pHumidity, float* pTemperature)
     uint32_t lowMicros[DHT_PULSES + 1] = {0};
     uint32_t highMicros[DHT_PULSES] = {0};
 
-    pi_mmio_set_output(pin);
+    RaspberryPi::pi_mmio_set_output(pin);
 
     // Set process priority for real-time performance.
     set_max_priority();
 
-    pi_mmio_set_high(pin);
+    RaspberryPi::pi_mmio_set_high(pin);
     sleep_milliseconds(500);
 
-    pi_mmio_set_low(pin);
+    RaspberryPi::pi_mmio_set_low(pin);
     busy_wait_milliseconds(20);
 
-    pi_mmio_set_input(pin);
-    pi_timer_sleep_micros(2);
+    RaspberryPi::pi_mmio_set_input(pin);
+    RaspberryPi::pi_timer_sleep_micros(2);
 
     uint32_t lowStartedUs = getTransitionMicros(pin, false);
     if (lowStartedUs == 0) {
