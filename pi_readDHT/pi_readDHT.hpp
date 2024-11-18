@@ -1,7 +1,7 @@
 #ifndef PI_DHT_READ_HPP
 #define PI_DHT_READ_HPP
 
-namespace Raspberry {
+namespace RaspberryPi {
   // Define sensor types
   #define DHT11 11
   #define DHT22 22
