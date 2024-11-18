@@ -32,8 +32,6 @@ std::string getLogHeader() {
 
 #define DHT_READ_LOG(fmt, ...) printf("%s" fmt, getLogHeader().c_str(), ##__VA_ARGS__)
 
-}
-
 // Return time in microseconds when the pin input signal is changed to the desired state.
 static uint32_t getTransitionMicros(int pin, bool transitionHigh) {
     uint32_t expectedValue = transitionHigh ? (1 << pin) : 0;
