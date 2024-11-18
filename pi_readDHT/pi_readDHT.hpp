@@ -1,7 +1,7 @@
 #ifndef PI_DHT_READ_HPP
 #define PI_DHT_READ_HPP
 
-namespace RaspberryPi {
+
   // Define sensor types
   #define DHT11 11
   #define DHT22 22
@@ -17,5 +17,5 @@ namespace RaspberryPi {
    * @return 1 if successful, 0 if failed
    */
   int dht_read(int type, int pin, float* pHumidity, float* pTemperature);
-}
+
 #endif  // PI_DHT_READ_HPP
