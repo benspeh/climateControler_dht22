@@ -191,7 +191,7 @@ int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
     int success = 0;
     if (pHumidity == nullptr || pTemperature == nullptr) {
         DHT_READ_LOG("bad argument\n");
-    } else if (RaspberryPi::pi_mmio_init() != RaspberryPi::MmioError::SECCESS) { // 
+    } else if (RaspberryPi::pi_mmio_init() != RaspberryPi::MmioError::SUCCESS) { // 
         DHT_READ_LOG("MMIO init failed. May not be root\n");
     } else {
         int lockfd = -1;
