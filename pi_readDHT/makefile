@@ -5,10 +5,10 @@ CXX = g++
 CXXFLAGS = -W -Wall -std=c++11 -lrt
 
 # Target executable
-TARGET = test_dht_read
+TARGET = dht_readLOOP
 
 # Source files and dependencies
-SOURCES = test_dht_read.cpp pi_dht_read.cpp bcm2708.cpp realtime.cpp
+SOURCES = dht_readLOOP.cpp pi_dht_read.cpp bcm2837.cpp realtime.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Build the target executable
