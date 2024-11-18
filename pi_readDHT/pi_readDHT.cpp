@@ -191,7 +191,7 @@ static void close_lockfile(int fd) {
     }
 }
 
-}  // namespace
+
 
 int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
     int success = 0;
@@ -222,3 +222,5 @@ int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
     }
     return success;
 }
+
+}  // namespace
