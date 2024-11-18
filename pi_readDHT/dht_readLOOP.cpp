@@ -10,7 +10,7 @@ int main(int argc, const char **argv) {
     float humidity, temperature;
     int count = argc < 2 ? 1 : atoi(argv[1]);  // Default 1 read if no argument is given
     while (count-- > 0) {
-        int success = Raspberry::dht_read(AM2302, DHTPIN, &humidity, &temperature);
+        int success = dht_read(AM2302, DHTPIN, &humidity, &temperature);
         if (success) {
             printf("Temperature: %.1f°C  Humidity: %.1f%%\n", temperature, humidity);
         } else {
