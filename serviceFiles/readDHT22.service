@@ -10,7 +10,7 @@ Restart=always
 # Add necessary capabilities
 #CapabilityBoundingSet=CAP_SYS_RAWIO
 AmbientCapabilities=CAP_SYS_RAWIO
-DeviceAllow=/dev/i2c-1 rw
+DeviceAllow=/dev/mem rw
 
 [Install]
 WantedBy=multi-user.target
