@@ -189,9 +189,6 @@ static void close_lockfile(int fd) {
     }
 }
 
-
-namespace Raspberry {
-
 int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
     int success = 0;
     if (pHumidity == nullptr || pTemperature == nullptr) {
@@ -221,5 +218,3 @@ int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
     }
     return success;
 }
-
-}  // namespace
