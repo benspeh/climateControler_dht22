@@ -30,9 +30,9 @@ namespace RaspberryPi {
 
 // Error codes
 enum class MmioError {
-    SUCCESS = 0,
-    DEVMEM_OPEN_FAIL = -1,
-    MMAP_FAIL = -2,
+    SUCCESS,
+    DEVMEM_OPEN_FAIL,
+    MMAP_FAIL,
 };
 
 // Pointers to GPIO and Timer memory-mapped regions
