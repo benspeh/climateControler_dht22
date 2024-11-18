@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>  // for sleep()
-#include "pi_dht_read.h"
+#include "pi_dht_read.hpp"
 
 // GPIO pin number for DHT sensor
 #define DHTPIN 24
