@@ -19,7 +19,7 @@
 // Number of bit pulses to expect from the DHT sensor.
 #define DHT_PULSES (1 + DHT_BYTES * 8)
 
-namespace {
+namespace Raspberry {
 
 std::string getLogHeader() {
     char buff[64];
