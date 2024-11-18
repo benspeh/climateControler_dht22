@@ -19,8 +19,6 @@
 // Number of bit pulses to expect from the DHT sensor.
 #define DHT_PULSES (1 + DHT_BYTES * 8)
 
-namespace Raspberry {
-
 std::string getLogHeader() {
     char buff[64];
     time_t timeNow = time(nullptr);
@@ -192,6 +190,7 @@ static void close_lockfile(int fd) {
 }
 
 
+namespace Raspberry {
 
 int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
     int success = 0;
