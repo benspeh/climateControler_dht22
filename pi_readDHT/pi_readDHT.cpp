@@ -49,7 +49,7 @@ static uint32_t getTransitionMicros(int pin, bool transitionHigh) {
     return (nowMicros == 0) ? UINT32_MAX : nowMicros;
 }
 
-void reset_dht_pin(int pin) {
+void softReset_dht_pin(int pin) {
     // Attempt a software reset of the GPIO pin
     RaspberryPi::pi_mmio_set_output(pin);  // Set pin to output mode
     RaspberryPi::pi_mmio_set_low(pin);     // Pull the pin low
@@ -81,7 +81,7 @@ static int pi_dht_read(int type, int pin, float* pHumidity, float* pTemperature)
 
     uint32_t lowStartedUs = getTransitionMicros(pin, false);
      if (lowStartedUs == 0) {
-        reset_dht_pin(pin);
+        softReset_dht_pin(pin);
         set_default_priority();
         DHT_READ_LOG("Timeout waiting for response low[%d]\n");
         return 0;
