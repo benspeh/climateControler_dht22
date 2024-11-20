@@ -210,7 +210,7 @@ int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
                 }
             }
             if (count > 0) {
-                sleep_milliseconds(1500);
+                sleep(2);
             }
         }
         if (lockfd >= 0) {
