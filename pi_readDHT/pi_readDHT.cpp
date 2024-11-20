@@ -70,12 +70,12 @@ static int pi_dht_read(int type, int pin, float* pHumidity, float* pTemperature)
     RaspberryPi::pi_mmio_set_input(pin);
     RaspberryPi::pi_timer_sleep_micros(2);
 
-    uint32_t lowStartedUs = getTransitionMicros(pin, false);
-    if (lowStartedUs == 0) {
-        set_default_priority();
-        DHT_READ_LOG("Timeout waiting for response low\n");
-        return 0;
-    }
+//    uint32_t lowStartedUs = getTransitionMicros(pin, false);
+ ///   if (lowStartedUs == 0) {
+  //      set_default_priority();
+  //      DHT_READ_LOG("Timeout waiting for response low\n");
+  //      return 0;
+  //  }
 
     int i;
     uint32_t highStartedUs;
