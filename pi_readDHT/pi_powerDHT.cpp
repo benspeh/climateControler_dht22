@@ -5,7 +5,7 @@
 #include <string>      // std::string
 
 #include "pi_powerDHT.hpp"
-#include "pi_LOGGING.hpp"
+#include "pi_logDHT.hpp"
 
 void dht_initPowerPin(int pin) {
 
