@@ -29,7 +29,7 @@ bool is_power_pin_high(int pin) {
 }
 
 void dht_resetPowerPin(int pin) {
-  printf("Resetting the sensors powerPin [%d]... \n", pin);
+  printf("Resetting the sensors powerPin[%d]... \n", pin);
 
     RaspberryPi::pi_mmio_set_output(pin);
 
