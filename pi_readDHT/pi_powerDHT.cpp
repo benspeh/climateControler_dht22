@@ -1,3 +1,8 @@
+#include "bcm2708.hpp"
+#include "realtime.hpp"
+#include "pi_readDHT.hpp"
+
+#include pi_powerDHT.hpp
 
 void dht_initPowerPin(int pin) {
     // Set the power pin as an output
@@ -13,14 +18,10 @@ void dht_initPowerPin(int pin) {
 }
 
 bool is_power_pin_high(int pin) {
-    // Ensure pin is set as output
-    RaspberryPi::pi_mmio_set_output(pin);
-
-    // Read the GPIO pin state
-    return RaspberryPi::pi_mmio_read(pin);
+    return RaspberryPi::pi_mmio_input(pin) != 0; // Returns true if HIGH
 }
 
-void power_cycle_dht22(int pin) {
+void pi_resetPowerPin(int pin) {
   printf("Resetting the sensors powerPin [%d]... \n", pin);
 
     RaspberryPi::pi_mmio_set_output(pin);
