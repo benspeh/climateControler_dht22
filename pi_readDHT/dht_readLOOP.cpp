@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>  // For sleep()
 #include "pi_readDHT.hpp"
+#include "pi_powerDHT.hpp"
+
+
 
 // Default GPIO dataPin and sleep time if not specified
 #define DEFAULT_POWER_PIN 22
@@ -27,6 +30,8 @@ int main(int argc, const char **argv) {
     printf("Starting DHT sensor readings on GPIO dataPin %d with a %d second interval.\n", dataPin, sleep_time);
     
     float humidity, temperature;
+
+    dht_initPowerPin(powerPin);
     
     while (true) {  // Infinite loop
         int success = dht_read(AM2302, dataPin, &humidity, &temperature);
@@ -34,7 +39,9 @@ int main(int argc, const char **argv) {
         if (success) {
             printf("Temperature: %.1f°C  Humidity: %.1f%%\n", temperature, humidity);
         } else {
-            printf("Failed to read sensor!\n");
+            printf("Failed to read sensor! Resetting the sensors powerPin [%d]... \n", powerPin);
+            dht_resetPowerPin(powerPin)
+            
         }
         
         printf("Waiting %d seconds before the next read...\n", sleep_time);
