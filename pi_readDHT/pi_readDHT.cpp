@@ -5,8 +5,6 @@
 #include <string>
 #include <unistd.h>
 
-
-
 #include "bcm2708.hpp"
 #include "realtime.hpp"
 #include "pi_logDHT.hpp"
@@ -62,7 +60,7 @@ static int pi_dht_read(int type, int pin, float* pHumidity, float* pTemperature)
      if (lowStartedUs == 0) {
         //softReset_dht_pin(pin);
         set_default_priority();
-        DHT_READ_LOG("Timeout waiting for response low[%d]\n");
+        DHT_READ_LOG("Timeout waiting for response low\n");
         return 0;
     }
 
