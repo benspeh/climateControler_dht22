@@ -2,7 +2,7 @@
 #include "realtime.hpp"
 #include <cstdio>
 
-#include "pi_readDHT.hpp"
+#include "pi_powerDHT.hpp"
 
 void dht_initPowerPin(int pin) {
     // Set the power pin as an output
