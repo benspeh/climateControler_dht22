@@ -49,15 +49,6 @@ static uint32_t getTransitionMicros(int pin, bool transitionHigh) {
     return (nowMicros == 0) ? UINT32_MAX : nowMicros;
 }
 
-void softReset_dht_pin(int pin) {
-    // Attempt a software reset of the GPIO pin
-    RaspberryPi::pi_mmio_set_output(pin);  // Set pin to output mode
-    RaspberryPi::pi_mmio_set_low(pin);     // Pull the pin low
-    busy_wait_milliseconds(10);            // Hold it low for 10ms
-    RaspberryPi::pi_mmio_set_high(pin);    // Pull it high (optional, for clean state)
-    RaspberryPi::pi_mmio_set_input(pin);   // Restore to input mode
-}
-
 static int pi_dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
     *pTemperature = 0.0f;
     *pHumidity = 0.0f;
