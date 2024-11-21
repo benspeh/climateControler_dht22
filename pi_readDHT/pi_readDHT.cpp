@@ -9,6 +9,7 @@
 
 #include "bcm2708.hpp"
 #include "realtime.hpp"
+#include "pi_logDHT.hpp"
 #include "pi_readDHT.hpp"
 
 #define LOCKFILE "/run/lock/dht_read.lck"
