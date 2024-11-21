@@ -81,7 +81,7 @@ static int pi_dht_read(int type, int pin, float* pHumidity, float* pTemperature)
 
     uint32_t lowStartedUs = getTransitionMicros(pin, false);
      if (lowStartedUs == 0) {
-        softReset_dht_pin(pin);
+        //softReset_dht_pin(pin);
         set_default_priority();
         DHT_READ_LOG("Timeout waiting for response low[%d]\n");
         return 0;
