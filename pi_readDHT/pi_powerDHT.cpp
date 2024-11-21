@@ -39,6 +39,7 @@ void dht_resetPowerPin(int pin) {
 
     // Turn on power
     RaspberryPi::pi_mmio_set_high(pin);
+    busy_wait_milliseconds(500);
 
     // Verify the pin is correctly set to HIGH
     if (is_power_pin_high(pin)) {
