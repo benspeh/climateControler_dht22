@@ -41,7 +41,7 @@ int main(int argc, const char **argv) {
         if (success) {
             printf("Temperature: %.1f°C  Humidity: %.1f%%\n", temperature, humidity);
         } else {
-            printf("Failed to read sensor!");
+            printf("Failed to read sensor!\n");
             dht_resetPowerPin(powerPin);
             
         }
