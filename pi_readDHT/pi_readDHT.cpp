@@ -23,19 +23,6 @@
 // Number of bit pulses to expect from the DHT sensor.
 #define DHT_PULSES (1 + DHT_BYTES * 8)
 
-std::string getLogHeader() {
-    char buff[64];
-    time_t timeNow = time(nullptr);
-    struct tm tmNow;
-    localtime_r(&timeNow, &tmNow);
-    snprintf(buff, sizeof(buff), "%04d-%02d-%02d %02d:%02d:%02d dht_read: ",
-             tmNow.tm_year + 1900, tmNow.tm_mon + 1, tmNow.tm_mday,
-             tmNow.tm_hour, tmNow.tm_min, tmNow.tm_sec);
-    return std::string(buff);
-}
-
-#define DHT_READ_LOG(fmt, ...) printf("%s" fmt, getLogHeader().c_str(), ##__VA_ARGS__)
-
 // Return time in microseconds when the pin input signal is changed to the desired state.
 static uint32_t getTransitionMicros(int pin, bool transitionHigh) {
     uint32_t expectedValue = transitionHigh ? (1 << pin) : 0;
