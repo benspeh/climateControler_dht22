@@ -5,6 +5,10 @@
 #include "pi_powerDHT.hpp"
 
 void dht_initPowerPin(int pin) {
+
+    if (RaspberryPi::pi_mmio_init() != RaspberryPi::MmioError::SUCCESS) { // 
+        DHT_READ_LOG("MMIO init failed. May not be root\n");
+    }
     // Set the power pin as an output
     RaspberryPi::pi_mmio_set_output(pin);
 
