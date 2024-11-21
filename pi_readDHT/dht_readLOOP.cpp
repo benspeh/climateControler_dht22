@@ -48,6 +48,7 @@ int main(int argc, const char **argv) {
                 printf("Temperature: %.1f°C  Humidity: %.1f%%\n", temperature, humidity);
             } else {
                 printf("Failed to read sensor after reset power supply!\n", powerPin);
+            }
         }
         
         printf("Waiting %d seconds before the next read...\n", sleep_time);
