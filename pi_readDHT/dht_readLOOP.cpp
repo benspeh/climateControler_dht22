@@ -13,7 +13,9 @@
 #define DEFAULT_SLEEP_TIME 60
 
 int main(int argc, const char **argv) {
+    int dataPin = DEFAULT_DATA_PIN;        
     int dataPin = DEFAULT_DATA_PIN;
+
     int sleep_time = DEFAULT_SLEEP_TIME;
     
     // Parse GPIO dataPin and sleep time from command line arguments
