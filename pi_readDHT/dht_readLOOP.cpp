@@ -13,7 +13,7 @@
 #define DEFAULT_SLEEP_TIME 60
 
 int main(int argc, const char **argv) {
-    int dataPin = DEFAULT_DATA_PIN;        
+    int powerPin = DEFAULT_POWER_PIN;        
     int dataPin = DEFAULT_DATA_PIN;
 
     int sleep_time = DEFAULT_SLEEP_TIME;
