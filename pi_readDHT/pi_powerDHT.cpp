@@ -1,8 +1,8 @@
 #include "bcm2708.hpp"
 #include "realtime.hpp"
-#include "pi_readDHT.hpp"
+#include <cstdio>
 
-#include pi_powerDHT.hpp
+#include "pi_readDHT.hpp"
 
 void dht_initPowerPin(int pin) {
     // Set the power pin as an output
