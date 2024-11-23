@@ -28,7 +28,8 @@ int main(int argc, const char **argv) {
     if (argc > 3) {
         sleep_time = atoi(argv[3]);
     }
-
+    
+    setvbuf(stdout, NULL, _IOLBF, 0); // Set stdout to line-buffered mode
     printf("Starting DHT sensor readings on GPIO dataPin %d with a %d second interval.\n", dataPin, sleep_time);
     
     float humidity, temperature;
@@ -52,6 +53,7 @@ int main(int argc, const char **argv) {
         }
         
         printf("Waiting %d seconds before the next read...\n", sleep_time);
+        fflush(stdout); // Ensure the log appears immediately
         sleep(sleep_time);  // Wait for the specified interval
     }
 
