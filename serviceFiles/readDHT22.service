@@ -3,8 +3,8 @@ Description=Your DHT Read Program
 After=network.target
 
 [Service]
-ExecStart=/home/git-repositories/climateControler_dht22/pi_dht_read/test_dht_read 1000000
-WorkingDirectory=/home/git-repositories/climateControler_dht22/pi_dht_read
+ExecStart=/home/git-repositories/climateControler_dht22/pi_readDHT/dht_readLOOP 22 23 60
+WorkingDirectory=/home/git-repositories/climateControler_dht22/pi_readDHT
 User=root
 Restart=always
 # Add necessary capabilities
