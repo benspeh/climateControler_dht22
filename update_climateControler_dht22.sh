@@ -6,10 +6,10 @@ sudo chmod +x ./update_climateControler_dht22.sh
 cd ./pi_readDHT
 
 sudo docker run --rm \
-  --privileged \    
+  --privileged \
   -v "$PWD":/workspace \
   -w /workspace \
-ubuntu bash -c "apt update && apt install -y build-essential sudo && rm pi_readDHT.o && make"
+  ubuntu bash -c "apt update && apt install -y build-essential sudo make && make clean && make"
 
 cd ../
 cd ./serviceFiles
