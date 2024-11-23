@@ -7,6 +7,7 @@ ExecStart=/home/git-repositories/climateControler_dht22/pi_readDHT/dht_readLOOP 
 WorkingDirectory=/home/git-repositories/climateControler_dht22/pi_readDHT
 User=root
 Restart=always
+RestartSec=5
 # Add necessary capabilities
 #CapabilityBoundingSet=CAP_SYS_RAWIO
 AmbientCapabilities=CAP_SYS_RAWIO
