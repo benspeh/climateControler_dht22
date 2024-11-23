@@ -11,6 +11,8 @@ Restart=always
 #CapabilityBoundingSet=CAP_SYS_RAWIO
 AmbientCapabilities=CAP_SYS_RAWIO
 DeviceAllow=/dev/mem rw
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
