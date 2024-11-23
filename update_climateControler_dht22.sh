@@ -7,8 +7,6 @@ cd ./pi_readDHT
 
 sudo docker run --rm \
   --privileged \    
-  --device /dev/mem:/dev/mem \    
-  --device /dev/gpiomem:/dev/gpiomem \
   -v "$PWD":/workspace \
   -w /workspace \
 ubuntu bash -c "apt update && apt install -y build-essential sudo && rm pi_readDHT.o && make"
