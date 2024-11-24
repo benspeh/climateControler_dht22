@@ -9,7 +9,7 @@ sudo docker run --rm \
   --privileged \
   -v "$PWD":/workspace \
   -w /workspace \
-  ubuntu bash -c "apt update && apt install -y build-essential sudo make && make clean && make"
+  ubuntu bash -c "apt update && apt install -y build-essential make && make clean && make"
 
 cd ../
 cd ./serviceFiles
