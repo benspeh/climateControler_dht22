@@ -185,7 +185,7 @@ int dht_read(int type, int pin, float* pHumidity, float* pTemperature) {
         DHT_READ_LOG("MMIO init failed. May not be root\n");
     } else {
         int lockfd = -1;
-        int count = 10;
+        int count = 5;
         while (count-- > 0) {
             if (lockfd < 0) {
                 lockfd = open_lockfile(LOCKFILE);
