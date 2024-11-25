@@ -13,4 +13,4 @@ sudo docker run --rm \
 
 cd ../
 cd ./serviceFiles
-sudo ./setup_readDHT22_service.sh
+sudo ./update_readDHT22_service.sh
