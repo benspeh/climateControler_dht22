@@ -19,6 +19,20 @@
 
 #### clone https://github.com/yamasy/pi_dht_read.git
     sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.com/yamasy/pi_dht_read.git
+
+### clone mqtt_cpp and boostLib
+
+mkdir sharedLib
+cd sharedLib
+
+sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.com/redboltz/mqtt_cpp.git
+
+sudo docker run --rm -v "$PWD":/repo -w /repo alpine     sh -c "apk add --no-cache wget tar && \
+           wget https://boostorg.jfrog.io/artifactory/main/release/1.86.0/source/boost_1_86_0.tar.gz && \
+           tar -xzf boost_1_86_0.tar.gz && \
+           rm boost_1_86_0.tar.gz"
+
+
     
 #### edit bcm2708.c to your pi model (here 3b+)
     #define BASE 0x3F000000          // Base address for the Raspberry Pi 3B+ peripherals
@@ -32,6 +46,7 @@
 #### test https://github.com/yamasy/pi_dht_read.git
 
     sudo docker run -it     --privileged     --device /dev/mem:/dev/mem     --device /dev/gpiomem:/dev/gpiomem     -v "$PWD":/workspace     -w /workspace     ubuntu     bash -c "apt update && apt install -y build-essential sudo && rm test_dht_read  && make && ./test_dht_read; bash"
+
 
 ### edit blynk-library/build.sh 
 
