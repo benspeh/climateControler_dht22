@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climateModel_VPD.hpp>
 #include <mqtt_client_cpp.hpp>
 
 const std::string HOST = "localhost";
