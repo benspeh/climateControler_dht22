@@ -3,7 +3,7 @@
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -W -Wall -std=c++14 -I../sharedLib/include
-LDFLAGS = -L../sharedLib -lexample
+LDFLAGS = -L../sharedLib -lboost -lmqtt_cpp
 
 # Target executable
 TARGET = dht_climateModel_subscriber
