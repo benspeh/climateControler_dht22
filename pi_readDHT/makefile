@@ -1,14 +1,12 @@
-# Makefile for C++ version
-
-# Compiler and flags
 CXX = g++
-CXXFLAGS = -W -Wall -std=c++11 -lrt
+CXXFLAGS = -W -Wall -std=c++14 -I../sharedLib/mqtt_cpp/include -I../sharedLib/boost_1_86_0
+LDFLAGS = -L../sharedLib -lboost_system -lpthread
 
 # Target executable
-TARGET = dht_readLOOP
+TARGET = mqtt_dht22_publisher
 
 # Source files
-SOURCES = dht_readLOOP.cpp pi_readDHT.cpp pi_powerDHT.cpp bcm2837.cpp realtime.cpp
+SOURCES = dht_publishLOOP.cpp pi_readDHT.cpp pi_powerDHT.cpp bcm2837.cpp realtime.cpp
 
 # Build the target executable directly
 $(TARGET): $(SOURCES)
