@@ -2,13 +2,14 @@
 
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -W -Wall -std=c++11 -lrt
+CXXFLAGS = -W -Wall -std=c++14 -I../sharedLib/include
+LDFLAGS = -L../sharedLib -lexample
 
 # Target executable
-TARGET = dht_readLOOP
+TARGET = dht_climateModel_subscriber
 
 # Source files
-SOURCES = dht_readLOOP.cpp pi_readDHT.cpp pi_powerDHT.cpp bcm2837.cpp realtime.cpp
+SOURCES = dht_subscriberLOOP.cpp climateModel_VPD.cpp -I./mqtt_cpp/include -I./boost
 
 # Build the target executable directly
 $(TARGET): $(SOURCES)
