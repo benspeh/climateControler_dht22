@@ -13,7 +13,7 @@ SOURCES = dht_subscriberLOOP.cpp climateModel_VPD.cpp -I./mqtt_cpp/include -I./b
 
 # Build the target executable directly
 $(TARGET): $(SOURCES)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Clean up build files
 clean:
