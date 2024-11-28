@@ -1,17 +1,15 @@
-# Makefile for C++ version
-
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -W -Wall -std=c++14 -I../sharedLib/mqtt_cpp/include -I../sharedLib/boost_1_86_0/boost
-LDFLAGS = -L../sharedLib -lboost -lmqtt_cpp
+CXXFLAGS = -W -Wall -std=c++14 -I../sharedLib/mqtt_cpp/include -I../sharedLib/boost_1_86_0
+LDFLAGS = -L../sharedLib -lboost_system -lpthread
 
 # Target executable
-TARGET = dht_climateModel_subscriber
+TARGET = mqtt_dht22_subscriber
 
 # Source files
-SOURCES = dht_subscriberLOOP.cpp climateModel_VPD.cpp -I./mqtt_cpp/include -I./boost
+SOURCES = dht_subcriberLOOP.cpp climateModel_VPD.cpp
 
-# Build the target executable directly
+# Build the target executable
 $(TARGET): $(SOURCES)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
