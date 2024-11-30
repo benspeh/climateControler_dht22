@@ -1,5 +1,5 @@
 #include <cmath> // For exp
-#include "cimateModel_VPD.hpp"
+#include "climateModel_VPD.hpp"
 
 // Function to calculate the saturation vapor pressure (e_s) at a given temperature
 double saturationVaporPressure(double temperature) {
