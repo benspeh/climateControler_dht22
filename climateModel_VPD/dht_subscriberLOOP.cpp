@@ -29,12 +29,10 @@ int main() {
         // Subscribe to the desired topic
         client->subscribe(TOPIC, mqtt::qos::at_least_once);
 
-        while (true) {
-            // Process incoming messages
-            client->process_message(); // Blocks until a message is received or timeout occurs
-        }
+        // Run the IO context to process messages
+        ioc.run(); // Blocks until all asynchronous handlers are finished
 
-        // Disconnect when finished (although we won't reach here in the infinite loop)
+        // Disconnect when finished (although we won't reach here as `ioc.run()` is blocking)
         client->disconnect();
     } catch (const std::exception& ex) {
         std::cerr << "Error: " << ex.what() << std::endl;
@@ -43,4 +41,3 @@ int main() {
 
     return 0;
 }
-
