@@ -2,8 +2,6 @@
 #include <iostream>
 #include "climateModel_VPD.hpp"
 #include <mqtt_client_cpp.hpp>
-#include <iostream>
-#include <mqtt_client_cpp.hpp>
 #include <string>
 
 const std::string HOST = "127.0.0.1";  // Replace with your broker's IP
