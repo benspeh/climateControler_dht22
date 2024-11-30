@@ -10,7 +10,7 @@ SOURCES = dht_publishLOOP.cpp pi_readDHT.cpp pi_powerDHT.cpp bcm2837.cpp realtim
 
 # Build the target executable directly
 $(TARGET): $(SOURCES)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Clean up build files
 clean:
