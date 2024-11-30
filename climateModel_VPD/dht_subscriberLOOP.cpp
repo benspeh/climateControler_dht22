@@ -3,10 +3,13 @@
 #include <mqtt_client_cpp.hpp>
 
 const std::string HOST = "localhost";
+const std::uint16_t PORT = 1883;
 const std::string TOPIC = "sensor/dht22";
 
 int main() {
-    auto client = mqtt::make_sync_client(HOST, "1883");
+    boost::asio::io_context ioc; // Required for MQTT
+    auto client = mqtt::make_sync_client(ioc, HOST, PORT, mqtt::protocol_version::v3_1_1);
+
 
     client->set_clean_session(true);
     client->connect();
