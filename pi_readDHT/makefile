@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -W -Wall -std=c++14 -I../sharedLib/mqtt_cpp/include -I../sharedLib/boost_1_74_0
-LDFLAGS = -L../sharedLib -lboost_system -lboost_thread -lpthread
+LDFLAGS = -L../sharedLib -lpthread
 
 # Target executable
 TARGET = mqtt_dht22_publisher
