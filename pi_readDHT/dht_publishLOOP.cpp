@@ -10,7 +10,8 @@
 #define DEFAULT_SLEEP_TIME 60
 
 // MQTT settings
-const std::string HOST = "localhost"; // Peer-to-peer connection
+const std::string HOST = "localhost";
+const std::uint16_t PORT = 1883;
 const std::string TOPIC = "sensor/dht22";
 
 int main(int argc, const char **argv) {
@@ -30,7 +31,8 @@ int main(int argc, const char **argv) {
     dht_initPowerPin(powerPin);
 
     // Create MQTT client
-    auto client = mqtt::make_sync_client(HOST, "1883");
+    boost::asio::io_context ioc; // Required for MQTT
+    auto client = mqtt::make_sync_client(ioc, HOST, PORT, mqtt::protocol_version::v3_1_1);
 
     client->set_clean_session(true);
     client->connect();
