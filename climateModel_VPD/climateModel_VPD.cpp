@@ -1,3 +1,5 @@
+#include cimateModel_VPD.hpp 
+
 // Function to calculate the saturation vapor pressure (e_s) at a given temperature
 double saturationVaporPressure(double temperature) {
     return 0.6108 * exp((17.27 * temperature) / (temperature + 237.3));
