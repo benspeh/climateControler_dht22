@@ -32,8 +32,10 @@ sudo docker run --rm -v "$PWD":/repo -w /repo alpine     sh -c "apk add --no-cac
            tar -xzf boost_1_86_0.tar.gz && \
            rm boost_1_86_0.tar.gz"
 
+### run nanoMQ broker inside git
 
-    
+sudo docker run -d --name nanomq -p 1883:1883 -p 8083:8083 -p 8883:8883 emqx/nanomq:latest    
+
 #### edit bcm2708.c to your pi model (here 3b+)
     #define BASE 0x3F000000          // Base address for the Raspberry Pi 3B+ peripherals
     #define GPIO_BASE (BASE + 0x200000) // GPIO registers base address = 0x3F200000
