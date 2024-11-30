@@ -11,7 +11,7 @@
 #define DEFAULT_SLEEP_TIME 60
 
 // MQTT settings
-const std::string HOST = "localhost";
+const std::string HOST = "127.0.0.1";
 const std::uint16_t PORT = 1883;
 const std::string TOPIC = "sensor/dht22";
 
