@@ -1,3 +1,4 @@
+#define BOOST_ASIO_STANDALONE // Use Boost.Asio standalone mode
 #include <iostream>
 #include <string>
 #include <mqtt_client_cpp.hpp>
