@@ -1,9 +1,11 @@
-#define BOOST_ASIO_STANDALONE // Use Boost.Asio standalone mode
+// publisher.cpp
+
+#define BOOST_ASIO_STANDALONE
 #include <iostream>
 #include <string>
 #include <mqtt_client_cpp.hpp>
-#include "pi_readDHT.hpp"
-#include "pi_powerDHT.hpp"
+#include "pi_readDHT.hpp"  // Include your own DHT sensor reading header
+#include "pi_powerDHT.hpp" // Include your own DHT power management header
 
 // Default GPIO dataPin and sleep time if not specified
 #define DEFAULT_POWER_PIN 22
@@ -11,7 +13,7 @@
 #define DEFAULT_SLEEP_TIME 60
 
 // MQTT settings
-const std::string HOST = "127.0.0.1";
+const std::string HOST = "0.0.0.0"; // Localhost for testing
 const std::uint16_t PORT = 1883;
 const std::string TOPIC = "sensor/dht22";
 
@@ -29,31 +31,39 @@ int main(int argc, const char **argv) {
               << " with a " << sleep_time << " second interval." << std::endl;
 
     float humidity, temperature;
-    dht_initPowerPin(powerPin);
 
-    // Create MQTT client
-    boost::asio::io_context ioc; // Required for MQTT
+    // Create MQTT client (header-only mode)
+    boost::asio::io_context ioc;
     auto client = mqtt::make_sync_client(ioc, HOST, PORT, mqtt::protocol_version::v3_1_1);
 
     client->set_clean_session(true);
-    client->connect();
+    client->set_auto_pub_response(false); // Avoids unnecessary responses in peer-to-peer mode
 
-    while (true) {
-        int success = dht_read(AM2302, dataPin, &humidity, &temperature);
-        std::ostringstream payload;
+    try {
+        client->connect();
 
-        if (success) {
-            payload << "Temperature: " << temperature << "°C, Humidity: " << humidity << "%";
-            std::cout << payload.str() << std::endl;
-        } else {
-            payload << "Failed to read sensor!";
-            std::cout << payload.str() << std::endl;
+        while (true) {
+            int success = dht_read(AM2302, dataPin, &humidity, &temperature);
+          
+            std::ostringstream payload;
+
+            if (success) {
+                payload << "Temperature: " << temperature << "°C, Humidity: " << humidity << "%";
+                std::cout << payload.str() << std::endl;
+            } else {
+                payload << "Failed to read sensor!";
+                std::cout << payload.str() << std::endl;
+            }
+
+            // Publish the message to the topic
+            client->publish(TOPIC, payload.str());
+            sleep(sleep_time);
         }
 
-        client->publish(TOPIC, payload.str());
-        sleep(sleep_time);
+        client->disconnect();
+    } catch (const std::exception &ex) {
+        std::cerr << "Publisher error: " << ex.what() << std::endl;
     }
 
-    client->disconnect();
     return 0;
 }
