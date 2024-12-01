@@ -1,5 +1,3 @@
-// publisher.cpp
-
 #define BOOST_ASIO_STANDALONE
 #include <iostream>
 #include <string>
@@ -39,7 +37,7 @@ int main(int argc, const char **argv) {
 
     client->set_clean_session(true);
     client->set_auto_pub_response(false); // Avoids unnecessary responses in peer-to-peer mode
-    
+
     try {
         client->connect();
 
@@ -59,14 +57,15 @@ int main(int argc, const char **argv) {
                         payload << "Temperature: " << temperature << "°C, Humidity: " << humidity << "%";
                         std::cout << payload.str() << std::endl;
                     } else {
-                        printf("Failed to read sensor after reset powerPin[%d]!\n", powerPin);
                         payload << "Failed to read sensor after reset powerPin";
                         std::cout << payload.str() << std::endl;
                     }
             }
 
-            // Publish the message to the topic
+            // Publish the message to the topic with retained flag set to true
             client->publish(TOPIC, payload.str());
+
+            // Sleep for the configured interval
             sleep(sleep_time);
         }
 
@@ -77,3 +76,4 @@ int main(int argc, const char **argv) {
 
     return 0;
 }
+
