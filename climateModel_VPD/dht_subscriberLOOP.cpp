@@ -6,6 +6,8 @@
 #include <chrono>
 #include <memory>
 #include <mutex>
+#include <sstream>
+#include "climateModel_VPD.hpp"
 
 const std::string HOST = "0.0.0.0";  // Broker address
 const uint16_t PORT = 1883;           // Broker port
@@ -45,6 +47,37 @@ void monitor_connection(std::shared_ptr<ClientType> client) {
     }
 }
 
+// MQTT message handler
+void messageHandler(const std::string& topic, const std::string& payload) {
+    try {
+        std::cout << "Received message on topic: " << topic 
+                  << ", payload: " << payload << std::endl;
+
+        // Parse CSV payload
+        std::istringstream payloadStream(payload);
+        std::string token;
+        double temperature = 0.0;
+        double humidity = 0.0;
+
+        if (std::getline(payloadStream, token, ',')) {
+            temperature = std::stod(token); // Extract temperature
+        }
+        if (std::getline(payloadStream, token, ',')) {
+            humidity = std::stod(token); // Extract humidity
+        }
+
+        // Calculate and print VPD
+        double vpd = calculateVPD(temperature, humidity);
+        std::cout << "Temperature: " << temperature 
+                  << "°C, Humidity: " << humidity 
+                  << "%, VPD: " << vpd << " kPa" << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error processing message: " << e.what() << std::endl;
+    } catch (...) {
+        std::cerr << "Unknown error processing message" << std::endl;
+    }
+}
+
 int main() {
     try {
         boost::asio::io_context ioc;
@@ -56,24 +89,15 @@ int main() {
         client->set_clean_session(true);
 
         // Define message handler
+        // Set message handler
         client->set_publish_handler(
             [&](mqtt::optional<std::uint16_t> packet_id,
                 mqtt::publish_options pub_opts, 
                 mqtt::buffer topic,
                 mqtt::buffer payload) -> bool {
-                try {
-                    std::cout << "Received message on topic: " 
-                              << topic.to_string() 
-                              << ", payload: " 
-                              << payload.to_string() 
-                              << std::endl;
-                } catch (const std::exception& e) {
-                    std::cerr << "Error in publish handler: " << e.what() << std::endl;
-                } catch (...) {
-                    std::cerr << "Unknown error in publish handler" << std::endl;
-                }
+                messageHandler(topic.to_string(), payload.to_string());
                 return true;
-            });
+            });  
 
         // Connect to the broker
         client->connect();  
@@ -99,4 +123,3 @@ int main() {
 
     return 0;
 }
-
