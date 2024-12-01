@@ -31,6 +31,7 @@ int main(int argc, const char **argv) {
               << " with a " << sleep_time << " second interval." << std::endl;
 
     float humidity, temperature;
+    dht_initPowerPin(powerPin);
 
     // Create MQTT client (header-only mode)
     boost::asio::io_context ioc;
@@ -38,7 +39,7 @@ int main(int argc, const char **argv) {
 
     client->set_clean_session(true);
     client->set_auto_pub_response(false); // Avoids unnecessary responses in peer-to-peer mode
-
+    
     try {
         client->connect();
 
@@ -51,8 +52,17 @@ int main(int argc, const char **argv) {
                 payload << "Temperature: " << temperature << "°C, Humidity: " << humidity << "%";
                 std::cout << payload.str() << std::endl;
             } else {
-                payload << "Failed to read sensor!";
-                std::cout << payload.str() << std::endl;
+                dht_resetPowerPin(powerPin);
+            
+                success = dht_read(AM2302, dataPin, &humidity, &temperature);
+                    if (success) {
+                        payload << "Temperature: " << temperature << "°C, Humidity: " << humidity << "%";
+                        std::cout << payload.str() << std::endl;
+                    } else {
+                        printf("Failed to read sensor after reset powerPin[%d]!\n", powerPin);
+                        payload << "Failed to read sensor after reset powerPin";
+                        std::cout << payload.str() << std::endl;
+                    }
             }
 
             // Publish the message to the topic
