@@ -1,6 +1,9 @@
 #define BOOST_ASIO_STANDALONE
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <chrono>
+#include <thread>
 #include <mqtt_client_cpp.hpp>
 #include "pi_readDHT.hpp"  // Include your own DHT sensor reading header
 #include "pi_powerDHT.hpp" // Include your own DHT power management header
@@ -24,7 +27,7 @@ int main(int argc, const char **argv) {
     if (argc > 2) dataPin = atoi(argv[2]);
     if (argc > 3) sleep_time = atoi(argv[3]);
 
-    setvbuf(stdout, NULL, _IOLBF, 0);
+    //setvbuf(stdout, NULL, _IOLBF, 0);
     std::cout << "Starting DHT sensor readings on GPIO dataPin " << dataPin 
               << " with a " << sleep_time << " second interval." << std::endl;
 
@@ -46,18 +49,20 @@ int main(int argc, const char **argv) {
           
             std::ostringstream payload;
 
-            if (success) {
-                payload << "Temperature: " << temperature << "°C, Humidity: " << humidity << "%";
-                std::cout << payload.str() << std::endl;
+             if (success) {
+                payload << temperature << "," << humidity; // Format as CSV
+                std::cout << "Publishing: " << payload.str() << std::endl;
+                client->publish(TOPIC, payload.str(), mqtt::qos::at_least_once);
             } else {
                 dht_resetPowerPin(powerPin);
             
                 success = dht_read(AM2302, dataPin, &humidity, &temperature);
-                    if (success) {
-                        payload << "Temperature: " << temperature << "°C, Humidity: " << humidity << "%";
-                        std::cout << payload.str() << std::endl;
+                     if (success) {
+                        payload << temperature << "," << humidity; // Format as CSV
+                        std::cout << "Publishing: " << payload.str() << std::endl;
+                        client->publish(TOPIC, payload.str(), mqtt::qos::at_least_once);
                     } else {
-                        payload << "Failed to read sensor after reset powerPin";
+                        payload << "Failed to read sensor after resetting powerPin";
                         std::cout << payload.str() << std::endl;
                     }
             }
@@ -66,7 +71,7 @@ int main(int argc, const char **argv) {
             client->publish(TOPIC, payload.str());
 
             // Sleep for the configured interval
-            sleep(sleep_time);
+            std::this_thread::sleep_for(std::chrono::seconds(sleep_time)); // Publish interval
         }
 
         client->disconnect();
@@ -76,4 +81,3 @@ int main(int argc, const char **argv) {
 
     return 0;
 }
-
