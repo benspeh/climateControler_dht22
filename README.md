@@ -20,7 +20,7 @@
 #### clone https://github.com/yamasy/pi_dht_read.git
     sudo docker run --rm -v "$PWD":/repo -w /repo alpine/git clone https://github.com/yamasy/pi_dht_read.git
 
-### clone mqtt_cpp and boostLib
+#### clone mqtt_cpp and boostLib
 
 mkdir sharedLib
 cd sharedLib
@@ -35,6 +35,21 @@ sudo docker run --rm -v "$PWD":/repo -w /repo alpine     sh -c "apk add --no-cac
 ### run nanoMQ broker inside git
 
 sudo docker run -d --name nanomq -p 1883:1883 -p 8083:8083 -p 8883:8883 emqx/nanomq:latest    
+
+docker exec -it nanomq /bin/sh
+##### Edit nanomq.conf
+vi /etc/nanomq.conf
+
+// insert this options
+// mqtt {
+//    keepalive_multiplier = 1.25
+//    keepalive_max = 600  # Maximum allowed keep-alive interval in seconds
+//    keepalive_min = 10   # Minimum allowed keep-alive interval in seconds
+//}
+
+##### Restart NanoMQ to apply changes
+exit
+docker restart nanomq
 
 #### edit bcm2708.c to your pi model (here 3b+)
     #define BASE 0x3F000000          // Base address for the Raspberry Pi 3B+ peripherals
