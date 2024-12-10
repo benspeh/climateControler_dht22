@@ -26,7 +26,7 @@ int lastHour = -1;
 int lastDay = -1;
 
 // Helper function to reset hourly statistics if needed
-bool resetHourlyIfNeeded() {
+bool hourlyAggregatorReset() {
     std::time_t now = std::time(nullptr);
     std::tm* localTime = std::localtime(&now);
 
@@ -34,13 +34,15 @@ bool resetHourlyIfNeeded() {
         lastHour = localTime->tm_hour;
         temperatureAggregator.resetHourly();
         humidityAggregator.resetHourly();
+        vpdAggregator.resetHourly();
+
         return true;
     }
     return false;
 }
 
 // Helper function to reset daily statistics if needed
-bool resetDailyIfNeeded() {
+bool dailyAggregatorReset() {
     std::time_t now = std::time(nullptr);
     std::tm* localTime = std::localtime(&now);
 
@@ -48,6 +50,8 @@ bool resetDailyIfNeeded() {
         lastDay = localTime->tm_yday;
         temperatureAggregator.resetDaily();
         humidityAggregator.resetDaily();
+        vpdAggregator.resetDaily();
+
         return true;
     }
     return false;
@@ -73,6 +77,7 @@ void messageHandler(const std::string& topic, const std::string& payload) {
 
         // Calculate and print VPD
         double vpd = calculateVPD(temperature, humidity);
+        
         std::cout << "Temperature: " << temperature 
                   << "°C, Humidity: " << humidity 
                   << "%, VPD: " << vpd << " kPa" << std::endl;
@@ -84,20 +89,15 @@ void messageHandler(const std::string& topic, const std::string& payload) {
         vpdAggregator.addValue(vpd, now);
 
         // Example: Print hourly and daily statistics
-        if (/* hourly reset condition */) {
+        if (hourlyAggregatorReset()) {
             std::cout << "Hourly Mean Temperature: " << temperatureAggregator.hourlyMean() << "°C" << std::endl;
             std::cout << "Hourly Mean Humidity: " << humidityAggregator.hourlyMean() << "%" << std::endl;
-
-            temperatureAggregator.resetHourly();
-            humidityAggregator.resetHourly();
         }
 
-        if (/* daily reset condition */) {
+        if (dailyAggregatorReset()) {
             std::cout << "Daily Mean Temperature: " << temperatureAggregator.dailyMean() << "°C" << std::endl;
             std::cout << "Daily Mean Humidity: " << humidityAggregator.dailyMean() << "%" << std::endl;
 
-            temperatureAggregator.resetDaily();
-            humidityAggregator.resetDaily();
         }
     } catch (const std::exception& e) {
         std::cerr << "Error processing message: " << e.what() << std::endl;
