@@ -21,7 +21,37 @@ std::mutex client_mutex;
 MeanAggregator temperatureAggregator;
 MeanAggregator humidityAggregator;
 MeanAggregator vpdAggregator;
+// Helper variables for reset conditions
+int lastHour = -1;
+int lastDay = -1;
 
+// Helper function to reset hourly statistics if needed
+bool resetHourlyIfNeeded() {
+    std::time_t now = std::time(nullptr);
+    std::tm* localTime = std::localtime(&now);
+
+    if (localTime->tm_hour != lastHour) {
+        lastHour = localTime->tm_hour;
+        temperatureAggregator.resetHourly();
+        humidityAggregator.resetHourly();
+        return true;
+    }
+    return false;
+}
+
+// Helper function to reset daily statistics if needed
+bool resetDailyIfNeeded() {
+    std::time_t now = std::time(nullptr);
+    std::tm* localTime = std::localtime(&now);
+
+    if (localTime->tm_yday != lastDay) {
+        lastDay = localTime->tm_yday;
+        temperatureAggregator.resetDaily();
+        humidityAggregator.resetDaily();
+        return true;
+    }
+    return false;
+}
 // MQTT message handler
 void messageHandler(const std::string& topic, const std::string& payload) {
     try {
