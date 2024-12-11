@@ -92,11 +92,14 @@ void messageHandler(const std::string& topic, const std::string& payload) {
         if (hourlyAggregatorReset()) {
             std::cout << "Hourly Mean Temperature: " << temperatureAggregator.hourlyMean() << "°C" << std::endl;
             std::cout << "Hourly Mean Humidity: " << humidityAggregator.hourlyMean() << "%" << std::endl;
+            std::cout << "Hourly Mean VPD: " << vpdAggregator.hourlyMean() << "kPa" << std::endl;
+        
         }
 
         if (dailyAggregatorReset()) {
             std::cout << "Daily Mean Temperature: " << temperatureAggregator.dailyMean() << "°C" << std::endl;
             std::cout << "Daily Mean Humidity: " << humidityAggregator.dailyMean() << "%" << std::endl;
+            std::cout << "Daily Mean VPD: " << vpdAggregator.dailyMean() << "kPa" << std::endl;
 
         }
     } catch (const std::exception& e) {
