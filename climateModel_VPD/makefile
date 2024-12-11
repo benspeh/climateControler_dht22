@@ -7,7 +7,7 @@ LDFLAGS = -L../sharedLib -lpthread
 TARGET = mqtt_dht22_subscriber
 
 # Source files
-SOURCES = dht_subscriberLOOP.cpp climateModel_VPD.cpp
+SOURCES = dht_subscriberLOOP.cpp climateModel_VPD.cpp climateModel_aggregator.cpp
 
 # Build the target executable
 $(TARGET): $(SOURCES)
