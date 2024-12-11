@@ -51,22 +51,20 @@ int main(int argc, const char **argv) {
 
              if (success) {
                 payload << temperature << "," << humidity; // Format as CSV
-                std::cout << "Publishing: " << payload.str() << std::endl;
-                client->publish(TOPIC, payload.str(), mqtt::qos::at_least_once);
             } else {
                 dht_resetPowerPin(powerPin);
             
                 success = dht_read(AM2302, dataPin, &humidity, &temperature);
                      if (success) {
                         payload << temperature << "," << humidity; // Format as CSV
-                        std::cout << "Publishing: " << payload.str() << std::endl;
-                        client->publish(TOPIC, payload.str(), mqtt::qos::at_least_once);
                     } else {
-                        payload << "Failed to read sensor after resetting powerPin";
+                        payload << "NA,NA";
                         std::cout << payload.str() << std::endl;
                     }
             }
-
+            
+            std::cout << "Publishing: " << payload.str() << std::endl;
+            client->publish(TOPIC, payload.str(), mqtt::qos::at_least_once);
             // Sleep for the configured interval
             std::this_thread::sleep_for(std::chrono::seconds(sleep_time)); // Publish interval
         }
