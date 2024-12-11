@@ -67,9 +67,6 @@ int main(int argc, const char **argv) {
                     }
             }
 
-            // Publish the message to the topic with retained flag set to true
-            client->publish(TOPIC, payload.str());
-
             // Sleep for the configured interval
             std::this_thread::sleep_for(std::chrono::seconds(sleep_time)); // Publish interval
         }
