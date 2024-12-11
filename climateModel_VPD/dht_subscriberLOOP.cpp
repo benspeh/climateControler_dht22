@@ -9,7 +9,7 @@
 #include <mutex>
 #include <sstream>
 #include "climateModel_VPD.hpp"
-#include "Aggregator.hpp" // Include the aggregator header
+#include "climateModel_aggregator.hpp" // Include the aggregator header
 
 const std::string HOST = "0.0.0.0";  // Broker address
 const uint16_t PORT = 1883;          // Broker port
