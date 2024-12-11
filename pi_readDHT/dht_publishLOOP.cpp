@@ -39,7 +39,7 @@ int main(int argc, const char **argv) {
     auto client = mqtt::make_sync_client(ioc, HOST, PORT, mqtt::protocol_version::v3_1_1);
 
     client->set_clean_session(true);
-    client->set_auto_pub_response(false); // Avoids unnecessary responses in peer-to-peer mode
+    //client->set_auto_pub_response(false); // Avoids unnecessary responses in peer-to-peer mode
 
     try {
         client->connect();
