@@ -4,6 +4,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <ctime>
 #include <memory>
 #include <mutex>
 #include <sstream>
